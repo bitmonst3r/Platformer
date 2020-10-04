@@ -10,12 +10,16 @@ public class LevelParserStarter : MonoBehaviour
     public GameObject Brick;
     public GameObject QuestionBox;
     public GameObject Stone;
+    public GameObject Lava;
+    public GameObject Goal;
+    public GameObject Player;
     public Transform parentTransform;
 
     // Start is called before the first frame update
     void Start()
     {
         RefreshParse();
+        Player.SetActive(true);
     }
 
 
@@ -55,13 +59,14 @@ public class LevelParserStarter : MonoBehaviour
             case '?': ToSpawn = QuestionBox; break;
             case 'x': ToSpawn = Rock; break;
             case 's': ToSpawn = Stone; break;
-            //default: Debug.Log("Default Entered"); break;
+            case 't': ToSpawn = Lava; break;
+            case 'e': ToSpawn = Goal; break;
             default: return;
-             // ToSpawn = Brick;       break;
         }
 
         ToSpawn = GameObject.Instantiate(ToSpawn, parentTransform);
         ToSpawn.transform.localPosition = positionToSpawn;
+        Player.SetActive(true);
 
     }
 
@@ -76,5 +81,6 @@ public class LevelParserStarter : MonoBehaviour
 
         parentTransform = newParent.transform;
         FileParser();
+        Player.SetActive(true);
     }
 }
